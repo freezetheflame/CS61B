@@ -165,12 +165,14 @@ public class Model extends Observable {
         }
         return changed;
     }
+    //we don't need to worry about the side because we have already set the perspective
     private boolean moveTileUp(VTile vTile, Set<Tile> changedTiles) {
         int targetRow;
         VTile nearest = findNearestTileAbove(vTile);
         if (nearest == null) {
             targetRow = board.size() - 1;
         } else if (vTile.actualTile.value() == nearest.actualTile.value() && !changedTiles.contains(nearest.actualTile)) {
+            //check the value and hash map to see if we can merge
             targetRow = nearest.row;
         } else if (nearest.row == vTile.row + 1) {
             return false;
